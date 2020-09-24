@@ -22,7 +22,7 @@ const matrix = [
 // we'll need one where arr[0] < target and arr[arr.length-1] > target
 // we can use pointers to keep track of those and move through the matrix
 
-const searchMatrix = (matrix, target) => {
+const searchMatrix1 = (matrix, target) => {
   //almost forgot this edge case oof
   if (!matrix || !matrix.length) return false
   //pointers!
@@ -41,8 +41,46 @@ const searchMatrix = (matrix, target) => {
   return false
 }
 
-
 // works, but not super efficient at O(n + m)
-// could also try binary search since these arrays are all sorted
+// could also try binary search since these arrays are all sorted ho ho
+// finding the right array first is a little trickier because we're looking for a range instead of a single value
+// so first well start at the middle index and check if the element[0] is < target
+// if it isn't, we'll move the pointer to the left
+// if it is, we'll check the next element, too. If THAT element[0] is > target, we'll have found the correct array to search
+// if it's lesser, instead, then we'll move the pointer to the right
 
-console.log(searchMatrix(matrix, 55))
+// seperate the binary search for the 1d array because modularity yay
+const binarySearch = (array, target) => {
+  let start = 0
+  let end = array.length - 1
+  while (start <= end) {
+    // since start and end change depending on the conditional below, we can calculate a new midpoint each loop easily by adding and dividing them
+    let mid = Math.floor((start + end) / 2)
+    if (array[mid] === target) return true
+    else if (array[mid] > target) end = mid - 1
+    else start = mid + 1
+  }
+  return false
+}
+
+const searchMatrix = (matrix, target) => {
+  // edge cases!
+  if (!matrix || !matrix.length) return false
+  // somewhat less dry than I'd like
+  let start = 0
+  let end = matrix.length - 1
+  while (start <= end) {
+    let mid = Math.floor((start + end) / 2)
+    if (matrix[mid][0] === target) return true
+    else if (matrix[mid][0] > target) end = mid - 1
+    else {
+      if (!matrix[mid + 1] || matrix[mid + 1][0] > target) return binarySearch(matrix[mid], target)
+      else start = mid + 1
+    }
+  }
+  return false
+}
+
+// much better!
+
+console.log(searchMatrix([[1],[3]], 3))
