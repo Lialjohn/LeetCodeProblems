@@ -39,4 +39,4 @@ console.log(minDeletions("aaabbbcc"))
 console.log(minDeletions("ceabaacb"))
 console.log(minDeletions("aab"))
 
-// accepted at leetcode, although I think the time/space could be better. That inner while loop makes it slow D:
+// accepted at leetcode, although I think the time/space could be better. right now n can only go up to 26, but assuming each has a freq of n, I'll be performing increasing operations (up to 25) on each iteration. Not quite n^2 but close.
