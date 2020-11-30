@@ -29,8 +29,12 @@ class MaxHeap {
   insert(v) {
     this.values.push(v)
     this.bubble()
+    return this
   }
   bubble() {
+    // take new node an compare it to its parent
+    // then swap
+    // keep doing that until the new node is no longer greater than its parent
     let child = this.values.length - 1
     let parent = Math.floor((child - 1) / 2)
     while (this.values[parent] < this.values[child]) {
@@ -42,34 +46,30 @@ class MaxHeap {
     }
   }
   remove() {
-    const max = this.values[0]
-    const end = this.values.pop()
-    this.values[0] = end
+    // remove the top level element
+    // replace with most recent element and adjust
+    const v = this.values
+    ;[v[0], v[v.length - 1]] = [v[v.length - 1], v[0]]
+    const popped = v.pop()
     this.sink()
-    return max
+    return popped
   }
   sink() {
     const v = this.values
-    let parent = 0
-    while (true) {
-      let leftChild = 2 * parent + 1
-      let rightChild = 2 * parent + 2
-      let swap = null
-      if (leftChild < this.values.length) {
-        if (v[leftChild] > v[parent]) swap = leftChild
+    let parentIdx = 0
+    let childIdx = 2 * parentIdx + 1
+    // makes sure children aren't out of bounds
+    // swap with the largest child
+    // if the parent value is larger than either existing child value
+    while (v[parentIdx] <= v[childIdx] || v[parentIdx] <= v[childIdx + 1]) {
+      // if there's a right child and it's larger than the left child, increase idx
+      if (v[childIdx + 1] !== undefined && v[childIdx + 1] > v[childIdx]) {
+        childIdx++
       }
-      if (rightChild < this.values.length) {
-        if (
-          (swap === null && v[rightChild] > v[parent]) ||
-          (swap !== null && v[rightChild] > v[leftChild])
-           ) 
-            swap = rightChild
-      }
-      if (swap === null) break
-      let temp = v[parent]
-      v[parent] = v[swap]
-      v[swap] = temp
-      parent = swap
+      // now do the adjustments
+      ;[v[childIdx], v[parentIdx]] = [v[parentIdx], v[childIdx]]
+      parentIdx = childIdx
+      childIdx = 2 * parentIdx + 1
     }
   }
 }
