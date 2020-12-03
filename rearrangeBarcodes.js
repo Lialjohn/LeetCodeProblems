@@ -88,6 +88,7 @@ const rearrangeBarcodes = barcodes => {
   // put them in the pq
   for (let elem in counters) pq.insert(elem, counters[elem])
   const stack = []
+  // the while iterates on the top values freq - it will only be 0 when all element frequencies are 0
   while (pq.values[0].freq) {
     // if the last added stack element is the same as the current PQ element, swap the current element with the second most freqent so the values stay organized
     if (stack[stack.length - 1] === pq.values[0].value) pq.swap()
@@ -99,9 +100,12 @@ const rearrangeBarcodes = barcodes => {
   return stack
 }
 
+// inserting the elements would by O(nlogn). The while/sinking would probably be about the same - worst case will have every frequency be the same, so that when the top is reduced it'll travel all the way to the back on every iteration. so nlogn overall
+
 console.log(rearrangeBarcodes([1,1,2])) //[1,2,1]
 console.log(rearrangeBarcodes([7,7,7,8,5,7,5,5,5,8])) //[5,7,5,7,5,7,5,8,7,8]
 console.log(rearrangeBarcodes([1,1,1,2,2,2])) //[2,1,2,1,2,1]
 console.log(rearrangeBarcodes([1,1,1,1,2,2,3,3])) // [1,3,1,3,1,2,1,2]
 console.log(rearrangeBarcodes([1,1,1,1, 2,2,2,2, 3,3, 4,4, 5,5, 6, 7])) // [2,3,2,3,2,4,2,4,1,5,1,5,1,6,1,7]
 console.log(rearrangeBarcodes([1,1,1, 2,2,2,2, 3,3, 4,4, 5,5, 6,7])) // [2,3,2,4,2,4,2,5,1,5,1,6,1,7,3]
+console.log(rearrangeBarcodes([1,1,1,1, 2,2,2,2, 3,3,3,3, 4,4,4,4, 5,5,5,5, 6,6,6,6, 7,7,7,7]))
