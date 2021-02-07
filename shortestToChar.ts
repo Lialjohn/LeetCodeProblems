@@ -9,7 +9,7 @@
 // I'll try three pointers. One will search for target characters. Once found, the second will iterate through the rest of the characters starting at 0. I can push to a res array the Math.min(next target position - current position, prev target pos + curr pos). 
 // once the current pointer reaches the target pointer, the target pointer will move on in search of another target.
 // if next reaches the end of input, then next will be set to prev.
-// time for this is O(2n) because I'm iterating through the array with the char pointer as well as the... all-other-chars pointer. Space is O(n) because of the res array.
+// time for this is O(3n) because of indexOf() and I'm iterating through the array with the char pointer as well as the... all-other-chars pointer. Space is O(n) because of the res array.
 
 const shortestToChar = (s: string, c: string): number[] => {
     let prev: number = s.length
