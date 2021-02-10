@@ -49,9 +49,9 @@ const copyRandomList = (head: ListNode | null): ListNode | null => {
     }
     // start over from the start to assign randoms. 
     curr = head
-    let newHead: ListNode | null = head.next
+    const newHead: ListNode | null = head.next
     while (curr) {
-        let newListNode: ListNode | null = curr.next
+        const newListNode: ListNode | null = curr.next
         if (curr.random) newListNode.random = curr.random.next
         else newListNode.random = null
         curr = newListNode.next
@@ -59,7 +59,7 @@ const copyRandomList = (head: ListNode | null): ListNode | null => {
     // then reassign the nexts so that they're all pointing to the nexts in their own lists
     curr = head
     while (curr) {
-        let newNode = curr.next
+        const newNode: ListNode | null = curr.next
         curr.next = curr.next.next
         newNode.next = newNode.next && newNode.next.next
         curr = curr.next
