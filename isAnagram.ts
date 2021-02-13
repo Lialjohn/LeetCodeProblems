@@ -11,7 +11,7 @@
 
 const isAnagram = (s :string, t: string): boolean => {
     if (s.length !== t.length) return false
-    const m = {}
+    const m: object = {}
     for (let c of s) m[c] = m[c] + 1 || 1
     for (let c of t) {
         if (!m[c]) return false
