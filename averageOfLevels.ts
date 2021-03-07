@@ -7,6 +7,12 @@
 // I need the values of each depth to add together and divide. breadth first search will give me that
 // I'll have each node carry a depth with it into the queue and I'll keep a set of counter values outside the loop. Those values will count the number of elements at that depth, to divide the sum with later.
 
+import { createBT, TreeNode } from './utils/createBST'
+
+const tree = createBT([1,2,3,30,12,30,1,2,0,9])
+
+console.log(tree.right)
+
 class LevelsQ {
     list: object
     length: number
@@ -28,17 +34,6 @@ class LevelsQ {
         delete this.list[this.head++]
         this.length--
         return shifted
-    }
-}
-
-class TreeNode {
-    val: number
-    left: TreeNode | null
-    right: TreeNode | null
-    constructor(val?: number, left?: TreeNode | null, right?: TreeNode | null) {
-        this.val = val || 0
-        this.left = left || null
-        this.right = right || null
     }
 }
 
