@@ -16,6 +16,7 @@
 // ok iterate through array with a pointer on the current element and a variable holding the previous valid element, which starts at nums[0]. I need to hold the variable because if the number is a dupe, i'll need to skip. I also need some indicator of whether the previous difference was positive or negative, so maybe a switch variable will do.
 // I could also iterate through the array and make a new one with differences between each number and the next. if past number was positive and current negative or vice versa, count + 1. this would take up more memory if I don't mutate the original array.
 // so if the next number is greater than curr and positive switch is false, count++. if next number is lesser than curr and positive is true, count++. in both cases, flip positive. else no changes.
+// 
 
 const wiggleMaxLength = (nums: number[]): number => {
     let count = 1
