@@ -23,9 +23,12 @@ const isPowerOfTwoTwo = (n: number): boolean => {
 }
 
 const isPowerOfTwoThree = (n: number): boolean => {
+    console.log(n.toString(2))
     return n > 0 && ((n & (n-1)) === 0)
 }
 
-console.log(isPowerOfTwoThree(1)) // true
-console.log(isPowerOfTwoThree(16)) // true
+// console.log(isPowerOfTwoThree(1)) // true
+// console.log(isPowerOfTwoThree(16)) // true
 console.log(isPowerOfTwoThree(3)) // false
+console.log(isPowerOfTwoThree(7)) // false
+console.log(isPowerOfTwoThree(12)) // false
